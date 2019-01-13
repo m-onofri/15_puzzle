@@ -1,0 +1,93 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Comic Sans MS";
+}
+
+h1, h2, h3 {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 30px;
+  text-align: center;
+}
+
+#app {
+  width: 400px;
+  height: 800px;
+  display: block;
+  margin: auto;
+}
+
+#components {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 30px 0 30px;
+}
+
+#components h2 {
+  text-align: center;
+  font-size: 18px;
+  padding: 5px 0 5px;
+}
+
+#timer .time, #timer .controller {
+  display: inline-block;
+  margin-right: 30px;
+}
+
+#counter .value {
+  text-align: center;
+}
+
+.component {
+  width: 160px;
+  height: 75px;
+  border: 1px solid black;
+}
+
+#board {
+  width: 400px;
+  height: 400px;
+  display: grid;
+  grid-template-rows: repeat(4, 100px);
+  grid-template-columns: repeat(4, 100px);
+  grid-template-areas: "sl1 sl2 sl3 sl4"
+                       "sl5 sl6 sl7 sl8"
+                       "sl9 sl10 sl11 sl12"
+                       "sl13 sl14 sl15 sl16";
+  background-color: green;
+  border: 1px solid black;
+}
+
+#t1 {grid-area: sl1}
+#t2 {grid-area: sl2}
+#t3 {grid-area: sl3}
+#t4 {grid-area: sl4}
+#t5 {grid-area: sl5}
+#t6 {grid-area: sl6}
+#t7 {grid-area: sl7}
+#t8 {grid-area: sl8}
+#t9 {grid-area: sl9}
+#t10 {grid-area: sl10}
+#t11 {grid-area: sl11}
+#t12 {grid-area: sl12}
+#t13 {grid-area: sl13}
+#t14 {grid-area: sl14}
+#t15 {grid-area: sl15}
+
+.tile {
+  display: block;
+  width: 100px;
+  height: 100px;
+  background-color: #ddd;
+  border: 1px solid black;
+  font-size: 45px;
+  text-align: center;
+  padding-top: 20px;
+}

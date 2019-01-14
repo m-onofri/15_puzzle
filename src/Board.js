@@ -3,22 +3,19 @@ import Tile from './Tile.js';
 
 class Board extends Component {
 
-  generateTile = () => {
-    const container = [];
-    for (let i = 1; i < 16; i++) {
-      container.push(<Tile 
-                       index={i} 
-                       selectedTile={this.props.selectedTile}
-                     />);
-    }
-    return container;
-  }
 
   render() {
-
+    const{tiles, selectedTile} = this.props;
+    const tilesID = Object.keys(tiles);
     return(
       <div id="board">
-        {this.generateTile()}
+        {tilesID.map((tile, i) => <Tile 
+                                    id={tile}
+                                    index={i + 1}
+                                    tilePosition={tiles[tile]}
+                                    selectedTile={this.props.selectedTile}
+                                  />)}
+
       </div>
     );
   }

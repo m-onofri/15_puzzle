@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import Board from './Board.js';
+import Counter from './Counter.js';
 
 
 class App extends Component {
   state = {
     tiles: {},
-    emptySlot: {slot: 'sl16', x: 3, y: 3}
+    emptySlot: {slot: 'sl16', x: 3, y: 3},
+    counter: 0
   }
 
   TILES = ['t1', 't2', 't3', 't4', 't5', 't6', 't7', 't8',
@@ -72,10 +74,11 @@ class App extends Component {
     if (this.isValidSelection(tilePosition, emptySlot)) {
       const newObj = {...this.state.tiles};
       newObj[tileID]= emptySlot;
-      this.setState({
+      this.setState( prevState => ({
         tiles: newObj,
-        emptySlot: tilePosition
-      });
+        emptySlot: tilePosition,
+        counter: prevState.counter + 1
+      }));
     } else {
       console.log('WTF!!!');
     }
@@ -99,10 +102,9 @@ class App extends Component {
             <div class="controller">play</div>
             <div class="time"><h3>0 sec</h3></div>
           </div>
-          <div id="counter" class="component">
-            <h2>COUNTER</h2>
-            <div class="value"><h3>0</h3></div>
-          </div>
+          <Counter
+            counter={this.state.counter}
+          />
         </div>
         <Board
           tiles= {this.state.tiles}

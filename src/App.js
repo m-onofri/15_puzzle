@@ -4,24 +4,59 @@ import Board from './Board.js';
 
 class App extends Component {
   state = {
-    tiles: {
-      t1: {slot: 'sl1', x: 0, y: 0},
-      t2: {slot: 'sl2', x: 0, y: 1},
-      t3: {slot: 'sl3', x: 0, y: 2},
-      t4: {slot: 'sl4', x: 0, y: 3},
-      t5: {slot: 'sl5', x: 1, y: 0},
-      t6: {slot: 'sl6', x: 1, y: 1},
-      t7: {slot: 'sl7', x: 1, y: 2},
-      t8: {slot: 'sl8', x: 1, y: 3},
-      t9: {slot: 'sl9', x: 2, y: 0},
-      t10: {slot: 'sl10', x: 2, y: 1},
-      t11: {slot: 'sl11', x: 2, y: 2},
-      t12: {slot: 'sl12', x: 2, y: 3},
-      t13: {slot: 'sl13', x: 3, y: 0},
-      t14: {slot: 'sl14', x: 3, y: 1},
-      t15: {slot: 'sl15', x: 3, y: 2}
-    },
+    tiles: {},
     emptySlot: {slot: 'sl16', x: 3, y: 3}
+  }
+
+  TILES = ['t1', 't2', 't3', 't4', 't5', 't6', 't7', 't8',
+           't9', 't10', 't11', 't12', 't13', 't14', 't15'];
+
+  SLOTS = [{slot: 'sl1', x: 0, y: 0},
+           {slot: 'sl2', x: 0, y: 1},
+           {slot: 'sl3', x: 0, y: 2},
+           {slot: 'sl4', x: 0, y: 3},
+           {slot: 'sl5', x: 1, y: 0},
+           {slot: 'sl6', x: 1, y: 1},
+           {slot: 'sl7', x: 1, y: 2},
+           {slot: 'sl8', x: 1, y: 3},
+           {slot: 'sl9', x: 2, y: 0},
+           {slot: 'sl10', x: 2, y: 1},
+           {slot: 'sl11', x: 2, y: 2},
+           {slot: 'sl12', x: 2, y: 3},
+           {slot: 'sl13', x: 3, y: 0},
+           {slot: 'sl14', x: 3, y: 1},
+           {slot: 'sl15', x: 3, y: 2}];
+
+  shuffle = (array) => {
+    let currentIndex = array.length;
+    let counter = 20;
+    let temporaryValue = undefined;
+
+    while (counter > 0) {
+      let index1 = Math.floor(Math.random() * currentIndex);
+      let index2 = Math.floor(Math.random() * currentIndex);
+
+      while (index1 === index2) {
+        index2 = Math.floor(Math.random() * currentIndex);
+      }
+
+      temporaryValue = array[index1];
+      array[index1] = array[index2];
+      array[index2] = temporaryValue;
+
+      counter -= 1;
+    }
+
+    return array;
+  }
+
+  createObject = () => {
+    let randomArray = this.shuffle(this.SLOTS);
+    let newObj = this.TILES.reduce((obj, item, i) => {
+      obj[item] = randomArray[i];
+      return obj;
+    }, {});
+    return newObj;
   }
 
   isValidSelection = (start, end) => {
@@ -46,9 +81,17 @@ class App extends Component {
     }
   }
 
+  componentWillMount = () => {
+    const newObj = this.createObject();
+    this.setState({
+      tiles: newObj
+    });
+  }
+
   render() {
     return (
       <dev id="app">
+      {console.log(this.createObject())}
         <h1>The Fifthteen Puzzle Challenge</h1>
         <div id="components">
           <div id="timer" class="component">

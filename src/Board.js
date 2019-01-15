@@ -13,7 +13,7 @@ class Board extends Component {
                                     id={tile}
                                     index={i + 1}
                                     tilePosition={tiles[tile]}
-                                    selectedTile={this.props.selectedTile}
+                                    selectedTile={selectedTile}
                                   />)}
 
       </div>

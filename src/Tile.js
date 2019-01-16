@@ -2,14 +2,20 @@ import React, {Component} from 'react';
 
 class Tile extends Component {
 
+  isGameActive = (event) => {
+    if (!this.props.complete) {
+      this.props.selectedTile(event);
+    }
+  }
+
   render() {
-    const {id, index, tilePosition, selectedTile} = this.props;
+    const {id, index, tilePosition} = this.props;
     return(
       <div 
         id={id}
         style={{gridArea: tilePosition.slot}}
         className="tile"
-        onClick={(event) => selectedTile(event)}
+        onClick={(event) =>this.isGameActive(event)}
       >
         {index}
       </div>

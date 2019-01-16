@@ -10,7 +10,7 @@ class Board extends Component {
           alert,
           complete} = this.props;
     const tilesID = Object.keys(tiles);
-    
+
     return(
       <div 
         id="board"
@@ -21,6 +21,7 @@ class Board extends Component {
                                     index={i + 1}
                                     tilePosition={tiles[tile]}
                                     selectedTile={selectedTile}
+                                    complete={complete}
                                   />)}
 
       </div>

@@ -52,8 +52,8 @@ h1 {
 }
 
 #board {
-  width: 400px;
-  height: 400px;
+  width: 402px;
+  height: 402px;
   display: grid;
   grid-template-rows: repeat(4, 100px);
   grid-template-columns: repeat(4, 100px);
@@ -63,6 +63,10 @@ h1 {
                        "sl13 sl14 sl15 sl16";
   background-color: green;
   border: 1px solid black;
+}
+
+#board.alert {
+  box-shadow: 0px 0px 5px red;
 }
 
 #t1 {grid-area: sl1}

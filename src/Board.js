@@ -5,10 +5,13 @@ class Board extends Component {
 
 
   render() {
-    const{tiles, selectedTile} = this.props;
+    const{tiles, selectedTile, alert} = this.props;
     const tilesID = Object.keys(tiles);
     return(
-      <div id="board">
+      <div 
+        id="board"
+        className={alert ? "alert" : undefined}
+      >
         {tilesID.map((tile, i) => <Tile 
                                     id={tile}
                                     index={i + 1}

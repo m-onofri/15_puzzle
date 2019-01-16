@@ -7,7 +7,8 @@ class App extends Component {
   state = {
     tiles: {},
     emptySlot: {slot: 'sl16', x: 3, y: 3},
-    counter: 0
+    counter: 0,
+    alert: false
   }
 
   TILES = ['t1', 't2', 't3', 't4', 't5', 't6', 't7', 't8',
@@ -77,10 +78,11 @@ class App extends Component {
       this.setState( prevState => ({
         tiles: newObj,
         emptySlot: tilePosition,
-        counter: prevState.counter + 1
+        counter: prevState.counter + 1,
+        alert: false
       }));
     } else {
-      console.log('WTF!!!');
+      this.setState({alert: true});
     }
   }
 
@@ -109,6 +111,7 @@ class App extends Component {
         <Board
           tiles= {this.state.tiles}
           selectedTile={this.selectedTile}
+          alert={this.state.alert}
         />
       </dev>
     );

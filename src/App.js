@@ -103,6 +103,16 @@ class App extends Component {
     }
   }
 
+  resetGame = () => {
+    const newObj = this.createObject();
+    this.setState({
+      tiles: newObj,
+      emptySlot: {slot: 'sl16', x: 3, y: 3},
+      counter: 0,
+      alert: false
+    });
+  }
+
   componentWillMount = () => {
     const newObj = this.createObject();
     this.setState({
@@ -124,6 +134,9 @@ class App extends Component {
           <Counter
             counter={this.state.counter}
           />
+          <button
+            onClick={() => this.resetGame()}
+          >Reset</button>
         </div>
         <Board
           tiles= {this.state.tiles}

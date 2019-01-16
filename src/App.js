@@ -31,7 +31,8 @@ class App extends Component {
            {slot: 'sl15', x: 3, y: 2}];
 
   shuffle = (array) => {
-    let currentIndex = array.length;
+    let newArr = [...array];
+    let currentIndex = newArr.length;
     let counter = 20;
     let temporaryValue = undefined;
 
@@ -43,14 +44,14 @@ class App extends Component {
         index2 = Math.floor(Math.random() * currentIndex);
       }
 
-      temporaryValue = array[index1];
-      array[index1] = array[index2];
-      array[index2] = temporaryValue;
+      temporaryValue = newArr[index1];
+      newArr[index1] = newArr[index2];
+      newArr[index2] = temporaryValue;
 
       counter -= 1;
     }
 
-    return array;
+    return newArr;
   }
 
   createObject = () => {
@@ -66,6 +67,22 @@ class App extends Component {
     if ((start.x === end.x || start.y === end.y) && 
        (Math.abs(start.x - end.x) === 1 || Math.abs(start.y - end.y) === 1)) return true;
      return false;
+  }
+
+  isGameComplete = () => {
+    for (let i = 0; i < this.TILES.length; i++) {
+      let tile = this.TILES[i];
+      let slot = this.SLOTS[i].slot;
+      console.log(tile);
+      console.log(this.state.tiles[tile].slot);
+      console.log(slot);
+      console.log('WTF!?!');
+      if (this.state.tiles[tile].slot !== slot) {
+        return false;
+        break;
+      }
+    }
+    return true;
   }
 
   selectedTile = (event) => {
@@ -92,11 +109,11 @@ class App extends Component {
       tiles: newObj
     });
   }
+  
 
   render() {
     return (
       <dev id="app">
-      {console.log(this.createObject())}
         <h1>The Fifthteen Puzzle Challenge</h1>
         <div id="components">
           <div id="timer" class="component">
@@ -112,6 +129,7 @@ class App extends Component {
           tiles= {this.state.tiles}
           selectedTile={this.selectedTile}
           alert={this.state.alert}
+          complete={this.isGameComplete() ? true : false}
         />
       </dev>
     );

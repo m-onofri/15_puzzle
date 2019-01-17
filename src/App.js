@@ -128,7 +128,6 @@ class App extends Component {
         <div id="components">
           <div id="timer" class="component">
             <h2>TIMER</h2>
-            <div class="controller">play</div>
             <div class="time"><h3>0 sec</h3></div>
           </div>
           <Counter

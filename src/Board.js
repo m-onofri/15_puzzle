@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import Tile from './Tile.js';
 
 class Board extends Component {
@@ -29,4 +30,14 @@ class Board extends Component {
   }
 }
 
+Board.propTypes = {
+  tiles: PropTypes.object,
+  selectedTile: PropTypes.func,
+  alert: PropTypes.bool,
+  complete: PropTypes.bool
+}
+
 export default Board;
+
+
+

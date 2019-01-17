@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 class Tile extends Component {
 
@@ -21,6 +22,12 @@ class Tile extends Component {
       </div>
     );
   }
+}
+
+Tile.PropTypes = {
+  id: PropTypes.string,
+  index: PropTypes.number,
+  tilePosition: PropTypes.object
 }
 
 export default Tile;

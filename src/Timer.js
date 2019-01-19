@@ -15,31 +15,53 @@ class Timer extends Component {
     clearInterval(this.intervalID);
   }
 
+  timerControl = () => {
+    const now = Date.now();
+    this.setState(prevState => ({
+      previousTime: now,
+      elapsedTime: prevState.elapsedTime + (now - prevState.previousTime)
+    }));
+  }
+
+  timerStart = () => {
+    this.setState(prevState => ({
+      isTimeRunning: true,
+      previousTime: Date.now()
+    }));
+  }
+
+  timerStop = () => {
+    this.setState(prevState => ({
+      isTimeRunning: false
+    }));
+  }
+
+  timerReset = () => {
+    this.setState(prevState => ({
+      isTimeRunning: false,
+      elapsedTime: 0,
+      previousTime: 0
+    }));
+  }
+
   tick = () => {
-    if (this.state.isTimeRunning) {
-      const now = Date.now();
-      this.setState(prevState => ({
-        previousTime: now,
-        elapsedTime: prevState.elapsedTime + (now - prevState.previousTime)
-      }));
+    if ((!this.props.isGameStarted && !this.state.isTimeRunning && !this.props.complete) ||
+        (!this.props.isGameStarted && this.state.isTimeRunning && !this.props.complete)) {
+      //Reset the timer to zero
+      this.timerReset();
+      // FARE: deve essere possibile fare reset anche durante il gioco
     }
     if (this.props.isGameStarted && !this.state.isTimeRunning && !this.props.complete) {
-      this.setState(prevState => ({
-        isTimeRunning: true,
-        previousTime: Date.now()
-      }));
+      //Start the timer
+      this.timerStart();
     }
-    if (this.props.complete && this.state.isTimeRunning) {
-      this.setState(prevState => ({
-        isTimeRunning: false
-      }));
+    if (this.props.isGameStarted && this.state.isTimeRunning && !this.props.complete) {
+      //Control the timer when the game starts
+      this.timerControl();
     }
-    if (!this.props.isGameStarted && !this.state.isTimeRunning && !this.props.complete) {
-      this.setState(prevState => ({
-        isTimeRunning: false,
-        elapsedTime: 0,
-        previousTime: 0
-      }));
+    if (this.props.isGameStarted && this.state.isTimeRunning && this.props.complete) {
+      //When the game is over, stop the timer
+      this.timerStop();
     }
   }
 

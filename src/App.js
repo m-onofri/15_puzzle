@@ -103,13 +103,13 @@ class App extends Component {
 
   resetGame = () => {
     const newObj = this.createObject();
-    this.setState({
+    this.setState(prevState => ({
       tiles: newObj,
       emptySlot: {slot: 'sl16', x: 3, y: 3},
       counter: 0,
       alert: false,
       isGameStarted:false
-    });
+    }));
   }
 
   componentWillMount = () => {

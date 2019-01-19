@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Board from './Board.js';
-import Counter from './Counter.js';
+import TopPanel from './TopPanel.js';
+
 
 
 class App extends Component {
@@ -8,7 +9,8 @@ class App extends Component {
     tiles: {},
     emptySlot: {slot: 'sl16', x: 3, y: 3},
     counter: 0,
-    alert: false
+    alert: false,
+    isGameStarted: false
   }
 
   TILES = ['t1', 't2', 't3', 't4', 't5', 't6', 't7', 't8',
@@ -64,7 +66,7 @@ class App extends Component {
   }
 
   isValidSelection = (start, end) => {
-    if ((start.x === end.x || start.y === end.y) && 
+    if ((start.x === end.x || start.y === end.y) &&
        (Math.abs(start.x - end.x) === 1 || Math.abs(start.y - end.y) === 1)) return true;
      return false;
   }
@@ -73,13 +75,8 @@ class App extends Component {
     for (let i = 0; i < this.TILES.length; i++) {
       let tile = this.TILES[i];
       let slot = this.SLOTS[i].slot;
-      console.log(tile);
-      console.log(this.state.tiles[tile].slot);
-      console.log(slot);
-      console.log('WTF!?!');
       if (this.state.tiles[tile].slot !== slot) {
         return false;
-        break;
       }
     }
     return true;
@@ -96,7 +93,8 @@ class App extends Component {
         tiles: newObj,
         emptySlot: tilePosition,
         counter: prevState.counter + 1,
-        alert: false
+        alert: false,
+        isGameStarted: true
       }));
     } else {
       this.setState({alert: true});
@@ -109,7 +107,8 @@ class App extends Component {
       tiles: newObj,
       emptySlot: {slot: 'sl16', x: 3, y: 3},
       counter: 0,
-      alert: false
+      alert: false,
+      isGameStarted:false
     });
   }
 
@@ -119,29 +118,25 @@ class App extends Component {
       tiles: newObj
     });
   }
-  
+
 
   render() {
+
+    const completeGame = this.isGameComplete() ? true : false;
     return (
       <dev id="app">
         <h1>The Fifthteen Puzzle Challenge</h1>
-        <div id="components">
-          <div id="timer" class="component">
-            <h2>TIMER</h2>
-            <div class="time"><h3>0 sec</h3></div>
-          </div>
-          <Counter
-            counter={this.state.counter}
-          />
-          <button
-            onClick={() => this.resetGame()}
-          >Reset</button>
-        </div>
+        <TopPanel
+          counter={this.state.counter}
+          resetGame={this.resetGame}
+          isGameStarted={this.state.isGameStarted}
+          complete={completeGame}
+        />
         <Board
           tiles= {this.state.tiles}
           selectedTile={this.selectedTile}
           alert={this.state.alert}
-          complete={this.isGameComplete() ? true : false}
+          complete={completeGame}
         />
       </dev>
     );

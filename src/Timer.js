@@ -68,9 +68,12 @@ class Timer extends Component {
   render() {
 
     const seconds = Math.floor(this.state.elapsedTime / 1000);
+    const {complete} = this.props;
 
     return(
-      <div id="timer" class="component">
+      <div
+        id="timer"
+        className={`${'component'} ${complete ? 'complete' : undefined}`}>
         <h2>TIMER</h2>
         <div class="time"><h3>{seconds} sec</h3></div>
       </div>

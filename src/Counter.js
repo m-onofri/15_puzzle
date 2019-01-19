@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 
 class Counter extends Component {
   render() {
-    const {counter} = this.props;
+    const {counter, complete} = this.props;
 
     return (
-      <div id="counter" className="component">
+      <div
+        id="counter"
+        className={`${'component'} ${complete ? 'complete' : undefined}`}>
         <h2>COUNTER</h2>
         <div className="value">
           <h3>{counter}</h3>

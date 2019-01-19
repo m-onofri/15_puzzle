@@ -18,6 +18,7 @@ class TopPanel extends Component {
         />
         <Counter
           counter={counter}
+          complete={complete}
         />
         <Button
           resetGame={resetGame}

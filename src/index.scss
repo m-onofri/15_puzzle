@@ -41,6 +41,10 @@ h1 {
   margin-left: 60px;
 }
 
+#timer.complete, #counter.complete {
+box-shadow: 0px 0px 5px green;
+}
+
 #counter .value {
   text-align: center;
 }

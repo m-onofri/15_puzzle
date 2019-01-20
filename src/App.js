@@ -92,7 +92,7 @@ class App extends Component {
     const tileID = event.target.id;
     const tilePosition = this.state.tiles[tileID];
     const emptySlot = this.state.emptySlot;
-    let newEmptySlot, mediumTile;
+    let newEmptySlot, mediumTile, mediumTile1;
 
     if (this.isValidSelection(tilePosition, emptySlot)) {
       const newObj = {...this.state.tiles};
@@ -130,6 +130,50 @@ class App extends Component {
         }
         newObj[tileID] = newObj[mediumTile];
         newObj[mediumTile]= emptySlot;
+        newEmptySlot = [tilePosition];
+      }
+
+      if ((Math.abs(tilePosition.x - emptySlot.x) === 0 && Math.abs(tilePosition.y - emptySlot.y) === 3)) {
+        if (tilePosition.y < emptySlot.y) {
+          mediumTile = Object.keys(tiles).filter(tile => {
+            return tiles[tile].y === (tilePosition.y + 1) && tiles[tile].x === tilePosition.x;
+          });
+          mediumTile1 = Object.keys(tiles).filter(tile => {
+            return tiles[tile].y === (tilePosition.y + 2) && tiles[tile].x === tilePosition.x;
+          });
+        } else {
+          mediumTile = Object.keys(tiles).filter(tile => {
+            return tiles[tile].y === (tilePosition.y - 1) && tiles[tile].x === tilePosition.x;
+          });
+          mediumTile1 = Object.keys(tiles).filter(tile => {
+            return tiles[tile].y === (tilePosition.y - 2) && tiles[tile].x === tilePosition.x;
+          });
+        }
+        newObj[tileID] = newObj[mediumTile];
+        newObj[mediumTile]= newObj[mediumTile1];
+        newObj[mediumTile1]= emptySlot;
+        newEmptySlot = [tilePosition];
+      }
+
+      if ((Math.abs(tilePosition.y - emptySlot.y) === 0 && Math.abs(tilePosition.x - emptySlot.x) === 3)) {
+        if (tilePosition.x < emptySlot.x) {
+          mediumTile = Object.keys(tiles).filter(tile => {
+            return tiles[tile].x === (tilePosition.x + 1) && tiles[tile].y === tilePosition.y;
+          });
+          mediumTile1 = Object.keys(tiles).filter(tile => {
+            return tiles[tile].x === (tilePosition.x + 2) && tiles[tile].y === tilePosition.y;
+          });
+        } else {
+          mediumTile = Object.keys(tiles).filter(tile => {
+            return tiles[tile].x === (tilePosition.x - 1) && tiles[tile].y === tilePosition.y;
+          });
+          mediumTile1 = Object.keys(tiles).filter(tile => {
+            return tiles[tile].x === (tilePosition.x - 2) && tiles[tile].y === tilePosition.y;
+          });
+        }
+        newObj[tileID] = newObj[mediumTile];
+        newObj[mediumTile]= newObj[mediumTile1];
+        newObj[mediumTile1]= emptySlot;
         newEmptySlot = [tilePosition];
       }
 

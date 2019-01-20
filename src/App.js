@@ -70,8 +70,7 @@ class App extends Component {
 
   //Check if the tile selected from the user can be moved on the empty spot
   isValidSelection = (start, end) => {
-    if ((start.x === end.x || start.y === end.y) &&
-       (Math.abs(start.x - end.x) === 1 || Math.abs(start.y - end.y) === 1)) return true;
+    if (start.x === end.x || start.y === end.y) return true;
      return false;
   }
 
@@ -89,19 +88,54 @@ class App extends Component {
 
   //Update the state based on the tike selected by the user
   selectedTile = (event) => {
+    const tiles = this.state.tiles;
     const tileID = event.target.id;
     const tilePosition = this.state.tiles[tileID];
     const emptySlot = this.state.emptySlot;
+    let newEmptySlot, mediumTile;
 
     if (this.isValidSelection(tilePosition, emptySlot)) {
       const newObj = {...this.state.tiles};
+
       if ((Math.abs(tilePosition.x - emptySlot.x) === 1 ||
            Math.abs(tilePosition.y - emptySlot.y) === 1)) {
         newObj[tileID]= emptySlot;
+        newEmptySlot = [tilePosition];
       }
+
+      if ((Math.abs(tilePosition.x - emptySlot.x) === 0 && Math.abs(tilePosition.y - emptySlot.y) === 2)) {
+        if (tilePosition.y < emptySlot.y) {
+          mediumTile = Object.keys(tiles).filter(tile => {
+            return tiles[tile].y === (tilePosition.y + 1) && tiles[tile].x === tilePosition.x;
+          });
+        } else {
+          mediumTile = Object.keys(tiles).filter(tile => {
+            return tiles[tile].y === (tilePosition.y - 1) && tiles[tile].x === tilePosition.x;
+          });
+        }
+        newObj[tileID] = newObj[mediumTile];
+        newObj[mediumTile]= emptySlot;
+        newEmptySlot = [tilePosition];
+      }
+
+      if ((Math.abs(tilePosition.y - emptySlot.y) === 0 && Math.abs(tilePosition.x - emptySlot.x) === 2)) {
+        if (tilePosition.x < emptySlot.x) {
+          mediumTile = Object.keys(tiles).filter(tile => {
+            return tiles[tile].x === (tilePosition.x + 1) && tiles[tile].y === tilePosition.y;
+          });
+        } else {
+          mediumTile = Object.keys(tiles).filter(tile => {
+            return tiles[tile].x === (tilePosition.x - 1) && tiles[tile].y === tilePosition.y;
+          });
+        }
+        newObj[tileID] = newObj[mediumTile];
+        newObj[mediumTile]= emptySlot;
+        newEmptySlot = [tilePosition];
+      }
+
       this.setState( prevState => ({
         tiles: newObj,
-        emptySlot: tilePosition,
+        emptySlot: newEmptySlot[0],
         counter: prevState.counter + 1,
         alert: false,
         isGameStarted: true

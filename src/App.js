@@ -90,17 +90,16 @@ class App extends Component {
   selectedTile = (event) => {
     const tiles = this.state.tiles;
     const tileID = event.target.id;
-    const tilePosition = this.state.tiles[tileID];
+    const tilePosition = tiles[tileID];
     const emptySlot = this.state.emptySlot;
-    let newEmptySlot, mediumTile, mediumTile1;
+    let mediumTile, mediumTile1;
 
     if (this.isValidSelection(tilePosition, emptySlot)) {
-      const newObj = {...this.state.tiles};
+      const newObj = {...tiles};
 
       if ((Math.abs(tilePosition.x - emptySlot.x) === 1 ||
            Math.abs(tilePosition.y - emptySlot.y) === 1)) {
         newObj[tileID]= emptySlot;
-        newEmptySlot = [tilePosition];
       }
 
       if ((Math.abs(tilePosition.x - emptySlot.x) === 0 && Math.abs(tilePosition.y - emptySlot.y) === 2)) {
@@ -115,7 +114,6 @@ class App extends Component {
         }
         newObj[tileID] = newObj[mediumTile];
         newObj[mediumTile]= emptySlot;
-        newEmptySlot = [tilePosition];
       }
 
       if ((Math.abs(tilePosition.y - emptySlot.y) === 0 && Math.abs(tilePosition.x - emptySlot.x) === 2)) {
@@ -130,7 +128,6 @@ class App extends Component {
         }
         newObj[tileID] = newObj[mediumTile];
         newObj[mediumTile]= emptySlot;
-        newEmptySlot = [tilePosition];
       }
 
       if ((Math.abs(tilePosition.x - emptySlot.x) === 0 && Math.abs(tilePosition.y - emptySlot.y) === 3)) {
@@ -152,7 +149,6 @@ class App extends Component {
         newObj[tileID] = newObj[mediumTile];
         newObj[mediumTile]= newObj[mediumTile1];
         newObj[mediumTile1]= emptySlot;
-        newEmptySlot = [tilePosition];
       }
 
       if ((Math.abs(tilePosition.y - emptySlot.y) === 0 && Math.abs(tilePosition.x - emptySlot.x) === 3)) {
@@ -174,12 +170,11 @@ class App extends Component {
         newObj[tileID] = newObj[mediumTile];
         newObj[mediumTile]= newObj[mediumTile1];
         newObj[mediumTile1]= emptySlot;
-        newEmptySlot = [tilePosition];
       }
 
       this.setState( prevState => ({
         tiles: newObj,
-        emptySlot: newEmptySlot[0],
+        emptySlot: tilePosition,
         counter: prevState.counter + 1,
         alert: false,
         isGameStarted: true

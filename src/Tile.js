@@ -12,7 +12,7 @@ class Tile extends Component {
   render() {
     const {id, index, tilePosition} = this.props;
     return(
-      <div 
+      <div
         id={id}
         style={{gridArea: tilePosition.slot}}
         className="tile"

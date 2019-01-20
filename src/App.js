@@ -125,7 +125,7 @@ class App extends Component {
     const completeGame = this.isGameComplete() ? true : false;
     return (
       <dev id="app">
-        <h1>The Fifthteen Puzzle Challenge</h1>
+        <h1>The 15 Puzzle Challenge</h1>
         <TopPanel
           counter={this.state.counter}
           resetGame={this.resetGame}

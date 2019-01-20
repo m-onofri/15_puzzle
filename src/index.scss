@@ -16,6 +16,14 @@ h1 {
   text-align: center;
 }
 
+button {
+  background-color: #FF007D;
+  border-radius: 10px;
+  color: #fff;
+  font-family: "Comic Sans MS";
+  font-size: 16px;
+}
+
 #app {
   width: 400px;
   height: 800px;
@@ -42,7 +50,7 @@ h1 {
 }
 
 #timer.complete, #counter.complete {
-box-shadow: 0px 0px 5px green;
+box-shadow: 0px 0px 20px green;
 }
 
 #counter .value {
@@ -70,11 +78,11 @@ box-shadow: 0px 0px 5px green;
 }
 
 #board.alert {
-  box-shadow: 0px 0px 5px red;
+  box-shadow: 0px 0px 20px red;
 }
 
 #board.complete {
-  box-shadow: 0px 0px 5px green;
+  box-shadow: 0px 0px 20px green;
 }
 
 #t1 {grid-area: sl1}

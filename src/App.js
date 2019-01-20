@@ -2,7 +2,26 @@ import React, { Component } from 'react';
 import Board from './Board.js';
 import TopPanel from './TopPanel.js';
 
+//Tiles' IDs
+const TILES = ['t1', 't2', 't3', 't4', 't5', 't6', 't7', 't8',
+               't9', 't10', 't11', 't12', 't13', 't14', 't15'];
 
+//Slots' IDs and position in the grid
+const SLOTS = [{slot: 'sl1', x: 0, y: 0},
+               {slot: 'sl2', x: 0, y: 1},
+               {slot: 'sl3', x: 0, y: 2},
+               {slot: 'sl4', x: 0, y: 3},
+               {slot: 'sl5', x: 1, y: 0},
+               {slot: 'sl6', x: 1, y: 1},
+               {slot: 'sl7', x: 1, y: 2},
+               {slot: 'sl8', x: 1, y: 3},
+               {slot: 'sl9', x: 2, y: 0},
+               {slot: 'sl10', x: 2, y: 1},
+               {slot: 'sl11', x: 2, y: 2},
+               {slot: 'sl12', x: 2, y: 3},
+               {slot: 'sl13', x: 3, y: 0},
+               {slot: 'sl14', x: 3, y: 1},
+               {slot: 'sl15', x: 3, y: 2}];
 
 class App extends Component {
   state = {
@@ -13,25 +32,8 @@ class App extends Component {
     isGameStarted: false
   }
 
-  TILES = ['t1', 't2', 't3', 't4', 't5', 't6', 't7', 't8',
-           't9', 't10', 't11', 't12', 't13', 't14', 't15'];
-
-  SLOTS = [{slot: 'sl1', x: 0, y: 0},
-           {slot: 'sl2', x: 0, y: 1},
-           {slot: 'sl3', x: 0, y: 2},
-           {slot: 'sl4', x: 0, y: 3},
-           {slot: 'sl5', x: 1, y: 0},
-           {slot: 'sl6', x: 1, y: 1},
-           {slot: 'sl7', x: 1, y: 2},
-           {slot: 'sl8', x: 1, y: 3},
-           {slot: 'sl9', x: 2, y: 0},
-           {slot: 'sl10', x: 2, y: 1},
-           {slot: 'sl11', x: 2, y: 2},
-           {slot: 'sl12', x: 2, y: 3},
-           {slot: 'sl13', x: 3, y: 0},
-           {slot: 'sl14', x: 3, y: 1},
-           {slot: 'sl15', x: 3, y: 2}];
-
+  //Mix an array making an even number of items swap
+  //It takes an array as a single argument and return a new shuffled array
   shuffle = (array) => {
     let newArr = [...array];
     let currentIndex = newArr.length;
@@ -56,25 +58,28 @@ class App extends Component {
     return newArr;
   }
 
+  //Return an object taking keys from an array and taking values from another array
   createObject = () => {
-    let randomArray = this.shuffle(this.SLOTS);
-    let newObj = this.TILES.reduce((obj, item, i) => {
+    let randomArray = this.shuffle(SLOTS);
+    let newObj = TILES.reduce((obj, item, i) => {
       obj[item] = randomArray[i];
       return obj;
     }, {});
     return newObj;
   }
 
+  //Check if the tile selected from the user can be moved on the empty spot
   isValidSelection = (start, end) => {
     if ((start.x === end.x || start.y === end.y) &&
        (Math.abs(start.x - end.x) === 1 || Math.abs(start.y - end.y) === 1)) return true;
      return false;
   }
 
+  //Check if all the tiles are positioned in the correct order
   isGameComplete = () => {
-    for (let i = 0; i < this.TILES.length; i++) {
-      let tile = this.TILES[i];
-      let slot = this.SLOTS[i].slot;
+    for (let i = 0; i < TILES.length; i++) {
+      let tile = TILES[i];
+      let slot = SLOTS[i].slot;
       if (this.state.tiles[tile].slot !== slot) {
         return false;
       }
@@ -82,13 +87,16 @@ class App extends Component {
     return true;
   }
 
+  //Update the state based on the tike selected by the user
   selectedTile = (event) => {
     const tileID = event.target.id;
     const tilePosition = this.state.tiles[tileID];
     const emptySlot = this.state.emptySlot;
+
     if (this.isValidSelection(tilePosition, emptySlot)) {
       const newObj = {...this.state.tiles};
       newObj[tileID]= emptySlot;
+
       this.setState( prevState => ({
         tiles: newObj,
         emptySlot: tilePosition,
@@ -101,6 +109,7 @@ class App extends Component {
     }
   }
 
+  //Reset the state
   resetGame = () => {
     const newObj = this.createObject();
     this.setState(prevState => ({
@@ -112,6 +121,7 @@ class App extends Component {
     }));
   }
 
+  //Create the "tiles" object in the state before mounting the component
   componentWillMount = () => {
     const newObj = this.createObject();
     this.setState({

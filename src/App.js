@@ -95,8 +95,10 @@ class App extends Component {
 
     if (this.isValidSelection(tilePosition, emptySlot)) {
       const newObj = {...this.state.tiles};
-      newObj[tileID]= emptySlot;
-
+      if ((Math.abs(tilePosition.x - emptySlot.x) === 1 ||
+           Math.abs(tilePosition.y - emptySlot.y) === 1)) {
+        newObj[tileID]= emptySlot;
+      }
       this.setState( prevState => ({
         tiles: newObj,
         emptySlot: tilePosition,

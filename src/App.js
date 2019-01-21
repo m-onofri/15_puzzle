@@ -86,87 +86,52 @@ class App extends Component {
     return true;
   }
 
-  //Update the state based on the tike selected by the user
-  selectedTile = (event) => {
+  intermediateTile = (tilePosition, step, coordinate1) => {
     const tiles = this.state.tiles;
+    const coordinate2 = coordinate1 === "x" ? "y" : "x";
+    return Object.keys(tiles).filter(tile => {
+      return tiles[tile][coordinate1] === (tilePosition[coordinate1] + step) &&
+             tiles[tile][coordinate2] === tilePosition[coordinate2];
+    });
+  }
+
+  //Update the state based on the tile selected by the user
+  selectedTile = (event) => {
     const tileID = event.target.id;
-    const tilePosition = tiles[tileID];
+    const tilePosition = this.state.tiles[tileID];
     const emptySlot = this.state.emptySlot;
+    const newObj = {...this.state.tiles};
     let mediumTile, mediumTile1;
 
     if (this.isValidSelection(tilePosition, emptySlot)) {
-      const newObj = {...tiles};
-
-      if ((Math.abs(tilePosition.x - emptySlot.x) === 1 ||
-           Math.abs(tilePosition.y - emptySlot.y) === 1)) {
+      if ((Math.abs(tilePosition.x - emptySlot.x) === 1 || Math.abs(tilePosition.y - emptySlot.y) === 1)) {
         newObj[tileID]= emptySlot;
       }
 
-      if ((Math.abs(tilePosition.x - emptySlot.x) === 0 && Math.abs(tilePosition.y - emptySlot.y) === 2)) {
-        if (tilePosition.y < emptySlot.y) {
-          mediumTile = Object.keys(tiles).filter(tile => {
-            return tiles[tile].y === (tilePosition.y + 1) && tiles[tile].x === tilePosition.x;
-          });
-        } else {
-          mediumTile = Object.keys(tiles).filter(tile => {
-            return tiles[tile].y === (tilePosition.y - 1) && tiles[tile].x === tilePosition.x;
-          });
+      if ((Math.abs(tilePosition.x - emptySlot.x) === 2 || Math.abs(tilePosition.y - emptySlot.y) === 2)) {
+        if ((Math.abs(tilePosition.x - emptySlot.x) === 0 && Math.abs(tilePosition.y - emptySlot.y) === 2)) {
+          mediumTile = (tilePosition.y < emptySlot.y) ? this.intermediateTile(tilePosition, 1, 'y') : this.intermediateTile(tilePosition, -1, 'y');
         }
+
+        if ((Math.abs(tilePosition.y - emptySlot.y) === 0 && Math.abs(tilePosition.x - emptySlot.x) === 2)) {
+          mediumTile = (tilePosition.x < emptySlot.x) ? this.intermediateTile(tilePosition, 1, 'x') : this.intermediateTile(tilePosition, -1, 'x');
+        }
+
         newObj[tileID] = newObj[mediumTile];
         newObj[mediumTile]= emptySlot;
       }
 
-      if ((Math.abs(tilePosition.y - emptySlot.y) === 0 && Math.abs(tilePosition.x - emptySlot.x) === 2)) {
-        if (tilePosition.x < emptySlot.x) {
-          mediumTile = Object.keys(tiles).filter(tile => {
-            return tiles[tile].x === (tilePosition.x + 1) && tiles[tile].y === tilePosition.y;
-          });
-        } else {
-          mediumTile = Object.keys(tiles).filter(tile => {
-            return tiles[tile].x === (tilePosition.x - 1) && tiles[tile].y === tilePosition.y;
-          });
+      if ((Math.abs(tilePosition.x - emptySlot.x) === 3 || Math.abs(tilePosition.y - emptySlot.y) === 3)) {
+        if ((Math.abs(tilePosition.x - emptySlot.x) === 0 && Math.abs(tilePosition.y - emptySlot.y) === 3)) {
+          mediumTile = (tilePosition.y < emptySlot.y) ? this.intermediateTile(tilePosition, 1, 'y') : this.intermediateTile(tilePosition, -1, 'y');
+          mediumTile1 = (tilePosition.y < emptySlot.y) ? this.intermediateTile(tilePosition, 2, 'y') : this.intermediateTile(tilePosition, -2, 'y');
         }
-        newObj[tileID] = newObj[mediumTile];
-        newObj[mediumTile]= emptySlot;
-      }
 
-      if ((Math.abs(tilePosition.x - emptySlot.x) === 0 && Math.abs(tilePosition.y - emptySlot.y) === 3)) {
-        if (tilePosition.y < emptySlot.y) {
-          mediumTile = Object.keys(tiles).filter(tile => {
-            return tiles[tile].y === (tilePosition.y + 1) && tiles[tile].x === tilePosition.x;
-          });
-          mediumTile1 = Object.keys(tiles).filter(tile => {
-            return tiles[tile].y === (tilePosition.y + 2) && tiles[tile].x === tilePosition.x;
-          });
-        } else {
-          mediumTile = Object.keys(tiles).filter(tile => {
-            return tiles[tile].y === (tilePosition.y - 1) && tiles[tile].x === tilePosition.x;
-          });
-          mediumTile1 = Object.keys(tiles).filter(tile => {
-            return tiles[tile].y === (tilePosition.y - 2) && tiles[tile].x === tilePosition.x;
-          });
+        if ((Math.abs(tilePosition.y - emptySlot.y) === 0 && Math.abs(tilePosition.x - emptySlot.x) === 3)) {
+          mediumTile = (tilePosition.x < emptySlot.x) ? this.intermediateTile(tilePosition, 1, 'x') : this.intermediateTile(tilePosition, -1, 'x');
+          mediumTile1 = (tilePosition.x < emptySlot.x) ? this.intermediateTile(tilePosition, 2, 'x') : this.intermediateTile(tilePosition, -2, 'x');
         }
-        newObj[tileID] = newObj[mediumTile];
-        newObj[mediumTile]= newObj[mediumTile1];
-        newObj[mediumTile1]= emptySlot;
-      }
 
-      if ((Math.abs(tilePosition.y - emptySlot.y) === 0 && Math.abs(tilePosition.x - emptySlot.x) === 3)) {
-        if (tilePosition.x < emptySlot.x) {
-          mediumTile = Object.keys(tiles).filter(tile => {
-            return tiles[tile].x === (tilePosition.x + 1) && tiles[tile].y === tilePosition.y;
-          });
-          mediumTile1 = Object.keys(tiles).filter(tile => {
-            return tiles[tile].x === (tilePosition.x + 2) && tiles[tile].y === tilePosition.y;
-          });
-        } else {
-          mediumTile = Object.keys(tiles).filter(tile => {
-            return tiles[tile].x === (tilePosition.x - 1) && tiles[tile].y === tilePosition.y;
-          });
-          mediumTile1 = Object.keys(tiles).filter(tile => {
-            return tiles[tile].x === (tilePosition.x - 2) && tiles[tile].y === tilePosition.y;
-          });
-        }
         newObj[tileID] = newObj[mediumTile];
         newObj[mediumTile]= newObj[mediumTile1];
         newObj[mediumTile1]= emptySlot;

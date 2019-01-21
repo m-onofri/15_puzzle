@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 class Button extends Component {
   render() {
@@ -8,6 +9,10 @@ class Button extends Component {
       >Reset</button>
     );
   }
+}
+
+Button.propTypes = {
+  resetGame: PropTypes.func
 }
 
 export default Button;

@@ -68,12 +68,6 @@ class App extends Component {
     return newObj;
   }
 
-  //Check if the tile selected from the user can be moved on the empty spot
-  isValidSelection = (start, end) => {
-    if (start.x === end.x || start.y === end.y) return true;
-     return false;
-  }
-
   //Check if all the tiles are positioned in the correct order
   isGameComplete = () => {
     for (let i = 0; i < TILES.length; i++) {
@@ -86,6 +80,8 @@ class App extends Component {
     return true;
   }
 
+  //Find tile next to the one selected by the user
+  //It takes 3 arguments: tile position (object), step (num) and coordinate1 (string)
   intermediateTile = (tilePosition, step, coordinate1) => {
     const tiles = this.state.tiles;
     const coordinate2 = coordinate1 === "x" ? "y" : "x";
@@ -103,31 +99,30 @@ class App extends Component {
     const newObj = {...this.state.tiles};
     let mediumTile, mediumTile1;
 
-    if (this.isValidSelection(tilePosition, emptySlot)) {
+    if (tilePosition.x === emptySlot.x || tilePosition.y === emptySlot.y) {
+      //1-tile move
       if ((Math.abs(tilePosition.x - emptySlot.x) === 1 || Math.abs(tilePosition.y - emptySlot.y) === 1)) {
         newObj[tileID]= emptySlot;
       }
-
+      //2-tiles move
       if ((Math.abs(tilePosition.x - emptySlot.x) === 2 || Math.abs(tilePosition.y - emptySlot.y) === 2)) {
+
         if ((Math.abs(tilePosition.x - emptySlot.x) === 0 && Math.abs(tilePosition.y - emptySlot.y) === 2)) {
           mediumTile = (tilePosition.y < emptySlot.y) ? this.intermediateTile(tilePosition, 1, 'y') : this.intermediateTile(tilePosition, -1, 'y');
-        }
-
-        if ((Math.abs(tilePosition.y - emptySlot.y) === 0 && Math.abs(tilePosition.x - emptySlot.x) === 2)) {
+        } else if ((Math.abs(tilePosition.y - emptySlot.y) === 0 && Math.abs(tilePosition.x - emptySlot.x) === 2)) {
           mediumTile = (tilePosition.x < emptySlot.x) ? this.intermediateTile(tilePosition, 1, 'x') : this.intermediateTile(tilePosition, -1, 'x');
         }
 
         newObj[tileID] = newObj[mediumTile];
         newObj[mediumTile]= emptySlot;
       }
-
+      //3-tiles move
       if ((Math.abs(tilePosition.x - emptySlot.x) === 3 || Math.abs(tilePosition.y - emptySlot.y) === 3)) {
+
         if ((Math.abs(tilePosition.x - emptySlot.x) === 0 && Math.abs(tilePosition.y - emptySlot.y) === 3)) {
           mediumTile = (tilePosition.y < emptySlot.y) ? this.intermediateTile(tilePosition, 1, 'y') : this.intermediateTile(tilePosition, -1, 'y');
           mediumTile1 = (tilePosition.y < emptySlot.y) ? this.intermediateTile(tilePosition, 2, 'y') : this.intermediateTile(tilePosition, -2, 'y');
-        }
-
-        if ((Math.abs(tilePosition.y - emptySlot.y) === 0 && Math.abs(tilePosition.x - emptySlot.x) === 3)) {
+        } else if ((Math.abs(tilePosition.y - emptySlot.y) === 0 && Math.abs(tilePosition.x - emptySlot.x) === 3)) {
           mediumTile = (tilePosition.x < emptySlot.x) ? this.intermediateTile(tilePosition, 1, 'x') : this.intermediateTile(tilePosition, -1, 'x');
           mediumTile1 = (tilePosition.x < emptySlot.x) ? this.intermediateTile(tilePosition, 2, 'x') : this.intermediateTile(tilePosition, -2, 'x');
         }
@@ -145,7 +140,7 @@ class App extends Component {
         isGameStarted: true
       }));
     } else {
-      this.setState({alert: true});
+      this.setState(prevState => ({alert: true}));
     }
   }
 
@@ -163,15 +158,10 @@ class App extends Component {
 
   //Create the "tiles" object in the state before mounting the component
   componentWillMount = () => {
-    const newObj = this.createObject();
-    this.setState({
-      tiles: newObj
-    });
+    this.setState({tiles: this.createObject()});
   }
 
-
   render() {
-
     const completeGame = this.isGameComplete() ? true : false;
     return (
       <div id="app">

@@ -19,7 +19,8 @@ class Counter extends Component {
 }
 
 Counter.propTypes = {
-  counter: PropTypes.number
+  counter: PropTypes.number,
+  complete: PropTypes.bool
 }
 
 export default Counter;

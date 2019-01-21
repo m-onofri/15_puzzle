@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 class Timer extends Component {
   state = {
@@ -79,6 +80,11 @@ class Timer extends Component {
       </div>
     );
   }
+}
+
+Timer.propTypes = {
+  isGameStarted: PropTypes.bool,
+  complete: PropTypes.bool
 }
 
 export default Timer;

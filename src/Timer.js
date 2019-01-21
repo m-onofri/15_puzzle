@@ -75,7 +75,7 @@ class Timer extends Component {
         id="timer"
         className={`${'component'} ${complete ? 'complete' : undefined}`}>
         <h2>TIMER</h2>
-        <div class="time"><h3>{seconds} sec</h3></div>
+        <div className="time"><h3>{seconds} sec</h3></div>
       </div>
     );
   }

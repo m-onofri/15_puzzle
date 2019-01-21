@@ -174,7 +174,7 @@ class App extends Component {
 
     const completeGame = this.isGameComplete() ? true : false;
     return (
-      <dev id="app">
+      <div id="app">
         <h1>The 15 Puzzle Challenge</h1>
         <TopPanel
           counter={this.state.counter}
@@ -188,7 +188,7 @@ class App extends Component {
           alert={this.state.alert}
           complete={completeGame}
         />
-      </dev>
+      </div>
     );
   }
 }

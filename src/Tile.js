@@ -24,7 +24,7 @@ class Tile extends Component {
   }
 }
 
-Tile.PropTypes = {
+Tile.propTypes = {
   id: PropTypes.string,
   index: PropTypes.number,
   tilePosition: PropTypes.object

@@ -8,20 +8,20 @@ const TILES = ['t1', 't2', 't3', 't4', 't5', 't6', 't7', 't8',
 
 //Slots' IDs and position in the grid
 const SLOTS = [{slot: 'sl1', x: 0, y: 0},
-               {slot: 'sl2', x: 0, y: 1},
-               {slot: 'sl3', x: 0, y: 2},
-               {slot: 'sl4', x: 0, y: 3},
-               {slot: 'sl5', x: 1, y: 0},
+               {slot: 'sl2', x: 1, y: 0},
+               {slot: 'sl3', x: 2, y: 0},
+               {slot: 'sl4', x: 3, y: 0},
+               {slot: 'sl5', x: 0, y: 1},
                {slot: 'sl6', x: 1, y: 1},
-               {slot: 'sl7', x: 1, y: 2},
-               {slot: 'sl8', x: 1, y: 3},
-               {slot: 'sl9', x: 2, y: 0},
-               {slot: 'sl10', x: 2, y: 1},
+               {slot: 'sl7', x: 2, y: 1},
+               {slot: 'sl8', x: 3, y: 1},
+               {slot: 'sl9', x: 0, y: 2},
+               {slot: 'sl10', x: 1, y: 2},
                {slot: 'sl11', x: 2, y: 2},
-               {slot: 'sl12', x: 2, y: 3},
-               {slot: 'sl13', x: 3, y: 0},
-               {slot: 'sl14', x: 3, y: 1},
-               {slot: 'sl15', x: 3, y: 2}];
+               {slot: 'sl12', x: 3, y: 2},
+               {slot: 'sl13', x: 0, y: 3},
+               {slot: 'sl14', x: 1, y: 3},
+               {slot: 'sl15', x: 2, y: 3}];
 
 class App extends Component {
   state = {

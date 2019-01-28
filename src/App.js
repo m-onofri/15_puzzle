@@ -107,9 +107,13 @@ class App extends Component {
       //2-tiles move
       if ((Math.abs(tilePosition.x - emptySlot.x) === 2 || Math.abs(tilePosition.y - emptySlot.y) === 2)) {
 
+        //Vertical 2-tiles move
         if ((Math.abs(tilePosition.x - emptySlot.x) === 0 && Math.abs(tilePosition.y - emptySlot.y) === 2)) {
+          //From top to bottom if true or from bottom to top if false
           mediumTile = (tilePosition.y < emptySlot.y) ? this.intermediateTile(tilePosition, 1, 'y') : this.intermediateTile(tilePosition, -1, 'y');
+          //Horizontal 2-tiles move
         } else if ((Math.abs(tilePosition.y - emptySlot.y) === 0 && Math.abs(tilePosition.x - emptySlot.x) === 2)) {
+          //From left to right if true or from right to left
           mediumTile = (tilePosition.x < emptySlot.x) ? this.intermediateTile(tilePosition, 1, 'x') : this.intermediateTile(tilePosition, -1, 'x');
         }
 
@@ -118,11 +122,14 @@ class App extends Component {
       }
       //3-tiles move
       if ((Math.abs(tilePosition.x - emptySlot.x) === 3 || Math.abs(tilePosition.y - emptySlot.y) === 3)) {
-
+        //Vertical 3-tiles move
         if ((Math.abs(tilePosition.x - emptySlot.x) === 0 && Math.abs(tilePosition.y - emptySlot.y) === 3)) {
+          //From top to bottom if true or from bottom to top if false
           mediumTile = (tilePosition.y < emptySlot.y) ? this.intermediateTile(tilePosition, 1, 'y') : this.intermediateTile(tilePosition, -1, 'y');
           mediumTile1 = (tilePosition.y < emptySlot.y) ? this.intermediateTile(tilePosition, 2, 'y') : this.intermediateTile(tilePosition, -2, 'y');
+          //Horizontal 3-tiles move
         } else if ((Math.abs(tilePosition.y - emptySlot.y) === 0 && Math.abs(tilePosition.x - emptySlot.x) === 3)) {
+          //From left to right if true or from right to left
           mediumTile = (tilePosition.x < emptySlot.x) ? this.intermediateTile(tilePosition, 1, 'x') : this.intermediateTile(tilePosition, -1, 'x');
           mediumTile1 = (tilePosition.x < emptySlot.x) ? this.intermediateTile(tilePosition, 2, 'x') : this.intermediateTile(tilePosition, -2, 'x');
         }

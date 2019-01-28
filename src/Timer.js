@@ -8,14 +8,17 @@ class Timer extends Component {
     previousTime: 0
   }
 
+  //Start the execution of tick method each 100 ms
   componentDidMount() {
     this.intervalID = setInterval(() => this.tick(), 100);
   }
 
+  //End the execution of setInterval when the component will be unmount
   componentWillUnmount() {
     clearInterval(this.intervalID);
   }
 
+  //Control the regular functioning of timer
   timerControl = () => {
     const now = Date.now();
     this.setState(prevState => ({
@@ -24,6 +27,7 @@ class Timer extends Component {
     }));
   }
 
+  //Start the timer
   timerStart = () => {
     this.setState(prevState => ({
       isTimeRunning: true,
@@ -31,12 +35,14 @@ class Timer extends Component {
     }));
   }
 
+  //Stop the timer
   timerStop = () => {
     this.setState(prevState => ({
       isTimeRunning: false
     }));
   }
 
+  //Reset the timer to zero
   timerReset = () => {
     this.setState(prevState => ({
       isTimeRunning: false,
@@ -46,22 +52,22 @@ class Timer extends Component {
   }
 
   tick = () => {
+       //Reset the timer to zero whenever the game restart
     if ((!this.props.isGameStarted && !this.state.isTimeRunning && !this.props.complete) ||
+      //Reset the timer to zero during the game after pressing the reset button
         (!this.props.isGameStarted && this.state.isTimeRunning && !this.props.complete)) {
-      //Reset the timer to zero
       this.timerReset();
-      // FARE: deve essere possibile fare reset anche durante il gioco
     }
+    //It's executed when isGameStarted === true
+    //timerStart set isTimeRunning = true so the next block (with timerControl) is executed
     if (this.props.isGameStarted && !this.state.isTimeRunning && !this.props.complete) {
-      //Start the timer
       this.timerStart();
     }
     if (this.props.isGameStarted && this.state.isTimeRunning && !this.props.complete) {
-      //Control the timer when the game starts
       this.timerControl();
     }
+    //It's executed when the game is over
     if (this.props.isGameStarted && this.state.isTimeRunning && this.props.complete) {
-      //When the game is over, stop the timer
       this.timerStop();
     }
   }

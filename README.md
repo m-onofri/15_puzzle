@@ -10,4 +10,4 @@ The 15-puzzle game is a classical slide puzzle game that consists in a board gam
 
 ## Code organization
 
-## Cross-browser consistency
+## Cross-browser consistency 

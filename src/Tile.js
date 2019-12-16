@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 class Tile extends Component {
 
   /*Control the click event on each tile
-  **Execute the selectTile method only if this.prps.complete === false
+  **Execute the selectTile method only if this.props.complete === false
   */
   isGameActive = (event) => {
     if (!this.props.complete) {

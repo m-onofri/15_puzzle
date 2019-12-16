@@ -4,6 +4,7 @@
 
 body {
   font-family: "Comic Sans MS";
+  background-color: burlywood;
 }
 
 h1, h2, h3 {
@@ -17,7 +18,7 @@ h1 {
 }
 
 button {
-  background-color: #FF007D;
+  background-color: orangered;
   border-radius: 10px;
   color: #fff;
   font-family: "Comic Sans MS";
@@ -44,6 +45,12 @@ button {
   padding: 5px 0 5px;
 }
 
+#timer, #counter {
+  background-color: rgb(218, 216, 216);
+  border-radius: 5%;
+  border-color: white;
+}
+
 #timer .time {
   display: inline-block;
   margin-left: 60px;
@@ -51,6 +58,8 @@ button {
 
 #timer.complete, #counter.complete {
 box-shadow: 0px 0px 20px green;
+background-color: whitesmoke;
+border-radius: 5%;
 }
 
 #counter .value {
@@ -73,8 +82,8 @@ box-shadow: 0px 0px 20px green;
                        "sl5 sl6 sl7 sl8"
                        "sl9 sl10 sl11 sl12"
                        "sl13 sl14 sl15 sl16";
-  background-color: green;
   border: 1px solid black;
+  background-color: black;
 }
 
 #board.alert {
@@ -85,21 +94,22 @@ box-shadow: 0px 0px 20px green;
   box-shadow: 0px 0px 20px green;
 }
 
-#t1 {grid-area: sl1}
-#t2 {grid-area: sl2}
-#t3 {grid-area: sl3}
-#t4 {grid-area: sl4}
-#t5 {grid-area: sl5}
-#t6 {grid-area: sl6}
-#t7 {grid-area: sl7}
-#t8 {grid-area: sl8}
-#t9 {grid-area: sl9}
-#t10 {grid-area: sl10}
-#t11 {grid-area: sl11}
-#t12 {grid-area: sl12}
-#t13 {grid-area: sl13}
-#t14 {grid-area: sl14}
-#t15 {grid-area: sl15}
+#t1 {grid-area: sl1; background: url(./tiles/tile1.png);}
+#t2 {grid-area: sl2; background: url(./tiles/tile2.png)}
+#t3 {grid-area: sl3; background: url(./tiles/tile3.png)}
+#t4 {grid-area: sl4; background: url(./tiles/tile4.png)}
+#t5 {grid-area: sl5; background: url(./tiles/tile5.png)}
+#t6 {grid-area: sl6; background: url(./tiles/tile6.png)}
+#t7 {grid-area: sl7; background: url(./tiles/tile7.png)}
+#t8 {grid-area: sl8; background: url(./tiles/tile8.png)}
+#t9 {grid-area: sl9; background: url(./tiles/tile9.png)}
+#t10 {grid-area: sl10; background: url(./tiles/tile10.png)}
+#t11 {grid-area: sl11; background: url(./tiles/tile11.png)}
+#t12 {grid-area: sl12; background: url(./tiles/tile12.png)}
+#t13 {grid-area: sl13; background: url(./tiles/tile13.png)}
+#t14 {grid-area: sl14; background: url(./tiles/tile14.png)}
+#t15 {grid-area: sl15; background: url(./tiles/tile15.png)}
+#t16 {grid-area: sl16; background: url(./tiles/tile16.png)}
 
 .tile {
   display: block;

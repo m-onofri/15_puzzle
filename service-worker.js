@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/m-onofri/15_puzzle/precache-manifest.663992cab369c050a85ffb8d597b439e.js"
+  "/15_puzzle/precache-manifest.e0421d2f02e60fb4efdf1db7e2a64f70.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/m-onofri/15_puzzle/index.html", {
+workbox.routing.registerNavigationRoute("/15_puzzle/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });

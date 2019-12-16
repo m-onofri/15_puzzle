@@ -1,14 +1,14 @@
 {
-  "main.css": "/15_puzzle/static/css/main.f3575d8b.chunk.css",
-  "main.js": "/15_puzzle/static/js/main.233df017.chunk.js",
-  "main.js.map": "/15_puzzle/static/js/main.233df017.chunk.js.map",
+  "main.css": "/15_puzzle/static/css/main.1462bc0d.chunk.css",
+  "main.js": "/15_puzzle/static/js/main.c8104133.chunk.js",
+  "main.js.map": "/15_puzzle/static/js/main.c8104133.chunk.js.map",
   "static/js/1.93e5498c.chunk.js": "/15_puzzle/static/js/1.93e5498c.chunk.js",
   "static/js/1.93e5498c.chunk.js.map": "/15_puzzle/static/js/1.93e5498c.chunk.js.map",
   "runtime~main.js": "/15_puzzle/static/js/runtime~main.a1344d1b.js",
   "runtime~main.js.map": "/15_puzzle/static/js/runtime~main.a1344d1b.js.map",
-  "static/media/index.scss": "/15_puzzle/static/media/tile16.b8f19e2b.png",
-  "static/css/main.f3575d8b.chunk.css.map": "/15_puzzle/static/css/main.f3575d8b.chunk.css.map",
+  "static/media/index.scss": "/15_puzzle/static/media/tile14.6137c6e6.png",
+  "static/css/main.1462bc0d.chunk.css.map": "/15_puzzle/static/css/main.1462bc0d.chunk.css.map",
   "index.html": "/15_puzzle/index.html",
-  "precache-manifest.8a800f9e7dd12a06fade2d48757fe9a2.js": "/15_puzzle/precache-manifest.8a800f9e7dd12a06fade2d48757fe9a2.js",
+  "precache-manifest.fb280b759ae02998fcbcbe3e870b0bcc.js": "/15_puzzle/precache-manifest.fb280b759ae02998fcbcbe3e870b0bcc.js",
   "service-worker.js": "/15_puzzle/service-worker.js"
 }

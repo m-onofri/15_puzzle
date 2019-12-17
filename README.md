@@ -4,6 +4,8 @@ The 15-puzzle game is a classical slide puzzle game that consists in a board gam
 
 <img src="/public/game_board.png" width=300 align=center>
 
+You can play the game [here](https://m-onofri.github.io/15_puzzle/).
+
 ## How to clone the app locally
 
 Clone the git repository in the folder of your choice:
@@ -27,10 +29,22 @@ In your browser, go to http://localhost:3000/, and play the game.
 
 ## Main features
 
+* To move tiles you can simply click on the tiles you want to move.
+* You can also move two or three tiles at the same time, simply click on the farthest tile from the empty space on the game board.
+* There is a counter that counts how many moves you perform to complete the game
+* There is a timer that measures how many seconds you need to complete the game
 
 
 ## Code organization
 
+App
+   |_ TopPanel
+   |          |_ Timer
+   |          |_ Counter
+   |          |_ Button
+   |
+   |_ Board
+           |_ Tile
 
 
 ## Cross-browser consistency 

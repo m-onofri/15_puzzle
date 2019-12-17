@@ -35,7 +35,7 @@ In your browser, go to http://localhost:3000/, and play the game.
 * There is a timer that measures how many seconds you need to complete the game
 
 
-## Code organization
+## Compontents organization
 
 - App
     - TopPanel

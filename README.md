@@ -38,13 +38,12 @@ In your browser, go to http://localhost:3000/, and play the game.
 ## Code organization
 
 App
-   |_ TopPanel
-   |          |_ Timer
-   |          |_ Counter
-   |          |_ Button
-   |
-   |_ Board
-           |_ Tile
+    - TopPanel
+        - Timer
+        - Counter
+        - Button
+    - Board
+        - Tile
 
 
 ## Cross-browser consistency 

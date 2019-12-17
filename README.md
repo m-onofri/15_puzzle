@@ -37,7 +37,7 @@ In your browser, go to http://localhost:3000/, and play the game.
 
 ## Code organization
 
-App
+- App
     - TopPanel
         - Timer
         - Counter
